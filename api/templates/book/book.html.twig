@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('build/comments.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {% if book.image.filePath is defined %}
+                <img id="cover-book" src="{{ asset('media/'~book.image.filePath) }}" class="align-self-center mr-3 img-fluid" alt="{{ book.image.filePath }}"/>
+            {% endif %}
+        </div>
+        <div class="col">
+            <h4 class="row">
+                <i class="fas fa-book"></i>
+                {{ book.title }}
+            </h4>
+            <h4 class="row">
+                <i class="fas fa-user"></i>
+                {{ book.author }}
+            </h4>
+            <div class="row">
+                <p class="lead">{{ book.description }}</p>
+            </div>
+
+            <div class="row">
+                <i class="fas fa-barcode"></i>
+                {{ book.isbn }}
+            </div>
+
+            <div class="row">
+                <i class="fas fa-tags"></i>
+                {{ book.price }} $
+            </div>
+
+            <div class="row">
+                <div id="stock" data-book-stock="{{ book.stock }}" data-book-id="{{ book.id }}"></div>
+            </div>
+
+            <div class="row">
+                <a href="{{ path('booklist') }}">
+                    <button class="btn btn-link">
+                        <i class="fas fa-long-arrow-alt-left"></i>
+                        Back to the list
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="comments" data-book-id="{{ book.id }}"></div>
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('build/stock.js') }}"></script>
+    <script src="{{ asset('build/comments.js') }}"></script>
+{% endblock %}

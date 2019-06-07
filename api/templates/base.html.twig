@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link
+                rel="stylesheet"
+                href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+                integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+                crossorigin="anonymous"
+            >
+
+            <link href="{{ asset('build/welcome.css') }}" rel="stylesheet" />
+
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <div id="welcome"></div>
+            {% block body %}{% endblock %}
+        </div>
+        <script src="{{ asset('build/runtime.js') }}"></script>
+        <script src="{{ asset('build/welcome.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

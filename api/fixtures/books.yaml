@@ -1,0 +1,38 @@
+App\Entity\MediaObject:
+    madia_object_1:
+        filePath: 'cover1.jpg'
+    madia_object_2:
+        filePath: 'cover2.png'
+    madia_object_3:
+        filePath: 'cover3.png'
+    madia_object_4:
+        filePath: 'cover4.png'
+    madia_object_5:
+        filePath: 'cover5.png'
+    madia_object_6:
+        filePath: 'cover6.png'
+    madia_object_7:
+        filePath: 'cover7.png'
+    madia_object_8:
+        filePath: 'cover8.png'
+    madia_object_9:
+        filePath: 'cover9.png'
+    madia_object_10:
+        filePath: 'cover10.png'
+
+App\Entity\Book:
+    book_{1..10}:
+        title: <sentence(4, true)>
+        description: <text()>
+        author: <name()>
+        isbn: <isbn13()>
+        stock: <numberBetween(1, 100)>
+        price: <randomFloat(2, 2, 20)>
+        image: '@madia_object_*'
+        
+App\Entity\Comment:
+    comment_{1..20}:
+        name: <name()>
+        text: <text()>
+        createdAt: <DateTime('now')>
+        book: '@book*'
