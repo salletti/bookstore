@@ -58,7 +58,7 @@ watch-assets: node_modules
 
 ## Launch assets watch with Encore.
 watch-assets-encore: node_modules
-	$(DOCKER_NODE) sh -c "yarn encore dev --watch"
+	$(DOCKER_NODE) sh -c "yarn encore dev  --watch"
 
 ## Builds the db
 db: .env vendor

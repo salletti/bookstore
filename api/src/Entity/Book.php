@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -12,12 +12,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(mercure=true)
+ *
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
  */
 class Book
 {
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -29,6 +30,7 @@ class Book
      * @var string
      *
      * @ORM\Column
+     *
      * @Assert\NotBlank
      */
     private $title;
@@ -37,6 +39,7 @@ class Book
      * @var string
      *
      * @ORM\Column
+     *
      * @Assert\NotBlank
      */
     private $description;
@@ -45,6 +48,7 @@ class Book
      * @var string
      *
      * @ORM\Column
+     *
      * @Assert\NotBlank
      */
     private $author;
@@ -53,26 +57,32 @@ class Book
      * @var string
      *
      * @ORM\Column
+     *
      * @Assert\NotBlank
      */
     private $isbn;
 
     /**
      * @var int
-     * @ORM\Column
+     *
+     * @ORM\Column(type="integer")
+     *
      * @Assert\NotBlank
      */
     private $stock;
 
     /**
      * @var float
-     * @ORM\Column
+     *
+     * @ORM\Column(type="float")
+     *
      * @Assert\NotBlank
      */
     private $price;
 
     /**
      * @ApiSubresource()
+     *
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="book")
      */
     private $comments;
@@ -82,6 +92,7 @@ class Book
      *
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
+     *
      * @ApiProperty(iri="http://schema.org/image")
      */
     public $image;

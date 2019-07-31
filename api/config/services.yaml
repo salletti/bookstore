@@ -25,3 +25,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\EventSubscriber\HashPasswordSubscriber:
+        tags: ['doctrine.event_subscriber']
+
+    # Normalizer
+    App\Normalizer\SwaggerDecorator:
+        decorates: 'api_platform.swagger.normalizer.api_gateway'
+        arguments: [ '@App\Normalizer\SwaggerDecorator.inner' ]
+        autoconfigure: false
+    

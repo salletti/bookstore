@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="router-app" data-token="{{ csrf_token('authenticate') }}"
+         data-last-email="{{ last_username }}"
+         data-is-authenticated="{{ is_authenticated }}">
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/router-app.js') }}"></script>
+{% endblock %}

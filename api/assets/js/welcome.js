@@ -7,5 +7,8 @@ require('../css/app.scss')
 new Vue({
   el: '#welcome',
   template: '<Hello/>',
-  components: { Hello }
+  components: { Hello },
+  beforeMount: function () {
+    console.log(process.env.API_TOKEN)
+  }
 })

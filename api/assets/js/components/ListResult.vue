@@ -1,6 +1,5 @@
 <template>
     <div id="list-result">
-        {{ reset }}
         <p>Total: {{ $store.getters.countBooks }} books. </p>
         <table class="table">
             <tr>
@@ -37,27 +36,36 @@
 <script>
     export default {
         name: "List",
+        props: ['isEmptySearch'],
         created() {
             console.log('List created');
             this.fetchBooks()
 
         },
-        computed: {
-            reset() {
-                if (this.$store.getters.isEmptySearch === true) {
+        watch: {
+            isEmptySearch: function() {
+                console.log('isEmptySearch: ' + this.isEmptySearch)
+                if (this.isEmptySearch === true) {
                     this.fetchBooks()
                 }
             }
         },
         methods: {
             fetchBooks() {
-                console.log('fetch books');
-                fetch('/books')
+
+                var headers = new Headers();
+                headers.append('Authorization', this.$store.getters.getToken);
+
+                var requestConfig = {
+                    method: 'GET',
+                    headers: headers
+                };
+
+                fetch('/api/books', requestConfig)
                     .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        this.$store.commit('change', data['hydra:member'])
-                        console.log(this.$store.getters.getBookList)
+                    .then(data => {this.$store.commit('change', data['hydra:member'])
+                        console.log('list books:' + this.$store.getters.getBookList)
+                        this.$emit("empty-search", false)
                     })
             }
         }

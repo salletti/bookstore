@@ -1,48 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <table class="table">
-        <tr>
-            <th>
-                #Title
-            </th>
-            <th>
-                #Author
-            </th>
-            <th>
-                #Actions
-            </th>
-        </tr>
-    {% for book in books %}
-        <tr class="active">
-            <td>
-                <div id="book_title_{{ book.id }}" class="book-title">
-                    {{ book.title }}
-                </div>
-            </td>
-            <td>
-                {{ book.author }}
-            </td>
-            <td>
-                <button class="btn btn-danger">Delete</button>
-                <a href="{{ path('book', {'id': book.id}) }}"><button class="btn btn-primary"> View</button></a>
-            </td>
-        </tr>
-    {% endfor %}
-    </table>
-
+    <div id="book-list"></div>
+    <div id="app1"></div>
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-
-        const u = new URL('http://localhost:1337/hub');
-        u.searchParams.append('topic', 'https://localhost:8443/books/{id}');
-
-        const es = new EventSource(u);
-        es.onmessage = e => {
-            console.log('data: ');
-            console.log(JSON.parse(e.data));
-        }
-    </script>
+    <script src="{{ asset('build/list.js') }}"></script>
 {% endblock %}

@@ -1,24 +1,65 @@
 security:
+    encoders:
+        App\Entity\UserAccount:
+            algorithm: bcrypt
+            cost: 12
+        App\Entity\UserApi:
+            algorithm: bcrypt
+            cost: 12
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\UserAccount
+                property: email
+        api_user_provider:
+            entity:
+                class: App\Entity\UserApi
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+        api:
+            pattern: ^/api/
+            stateless: true
             anonymous: true
-
-            # activate different ways to authenticate
-
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
+            provider: api_user_provider
+            json_login:
+                check_path: /api/authentication_token
+                username_path: email
+                password_path: password
+            guard:
+                authenticators:
+                    - App\Security\TokenAuthenticator
+                    - App\Security\ApiJsonAuthenticator
+                entry_point: App\Security\ApiJsonAuthenticator
+        main:
+            pattern: ^/
+            anonymous: true
+            provider: app_user_provider
+            form_login:
+                # The route name that the login form submits to
+                check_path: app_login
+                login_path: app_login
+                username_parameter: email
+                password_parameter: password
+            json_login:
+                check_path: app_account
+                username_path: email
+                password_path: password
+            guard:
+                authenticators:
+                    - App\Security\JsonAuthenticator
+            logout:
+                # The route name the user can go to in order to logout
+                path: app_account_logout            
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: '^/api/docs', roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^/api', roles: ROLE_API }

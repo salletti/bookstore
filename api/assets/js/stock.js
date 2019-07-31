@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Stock from './components/Stock'
 
-console.log('store.js')
+console.log('stock.js')
 
 var stockVm = new Vue({
   el: '#stock',

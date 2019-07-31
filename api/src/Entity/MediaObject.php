@@ -1,5 +1,6 @@
 <?php
-// api/src/Entity/MediaObject.php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -14,6 +15,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity
+ *
  * @ApiResource(
  *     iri="http://schema.org/MediaObject",
  *     normalizationContext={
@@ -63,6 +65,7 @@ class MediaObject
      * @var string|null
      *
      * @ApiProperty(iri="http://schema.org/contentUrl")
+     *
      * @Groups({"media_object_read"})
      */
     public $contentUrl;
@@ -71,6 +74,7 @@ class MediaObject
      * @var File|null
      *
      * @Assert\NotNull(groups={"media_object_create"})
+     *
      * @Vich\UploadableField(mapping="media_object", fileNameProperty="filePath")
      */
     public $file;

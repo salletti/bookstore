@@ -48,11 +48,16 @@
                 author: '',
                 comment: '',
                 commentList: [],
-                sent: false
+                sent: false,
+                headers: {}
             }
         },
         created() {
             console.log('Comments.vue created');
+
+            this.headers = new Headers();
+            this.headers.append('Authorization', this.$store.getters.getToken);
+            this.headers.append('Content-Type', 'application/ld+json')
             this.fetchComments();
 
             const u = new URL('http://localhost:1337/hub');
@@ -72,8 +77,7 @@
         },
         methods: {
             fetchComments() {
-                console.log('fetch comments');
-                fetch('/books/' + this.bookId + '/comments')
+                fetch('/api/books/' + this.bookId + '/comments', {headers: this.headers})
                     .then(response => response.json())
                     .then(data => {
                         this.commentList = data['hydra:member'];
@@ -89,17 +93,18 @@
             },
             onSubmit() {
                 console.log('onSubmit');
-                fetch('/comments/', {
+                fetch('/api/comments/', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/ld+json'},
+                    headers: this.headers,
                     body: JSON.stringify({
-                        'book': "/books/" + this.bookId,
+                        'book': "/api/books/" + this.bookId,
                         'name': author.value,
                         'text': comment.value,
                         'createdAt': moment().format('YYYY-MM-DDThh:mm')
                     })
                 }).then(() => {
                     this.sent = true;
+                    this.fetchComments();
                     this.publishTopic();
                 });
             }

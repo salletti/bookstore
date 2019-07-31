@@ -24,7 +24,7 @@
             console.log('Stock.vue ' + this.book.id);
 
             const u = new URL('http://localhost:1337/hub');
-            u.searchParams.append('topic', 'https://localhost:8443/books/' + this.book.id);
+            u.searchParams.append('topic', 'https://localhost:8443/api/books/' + this.book.id);
 
             const es = new EventSource(u);
             es.onmessage = e => {

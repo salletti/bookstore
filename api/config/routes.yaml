@@ -1,3 +1,7 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+swagger_ui:
+    path: /api/docs
+    controller: api_platform.swagger.action.ui
+
+authentication_token:
+    path: /api/authentication_token
+    methods: ['POST']

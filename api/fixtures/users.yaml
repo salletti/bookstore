@@ -1,0 +1,7 @@
+App\Entity\UserAccount:
+    user_account_1:
+        email: user@bookstore.com
+        firstName: Stefano
+        lastName: Alletti
+        password: <('$2y$12$9sBaZahL.WWvJCJCMlxfwOVAT8RMI1F9BmTg/IglI4wUSMSJx.bHm')> # user
+        roles: ['ROLE_USER']

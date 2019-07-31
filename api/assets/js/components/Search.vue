@@ -22,18 +22,23 @@
             fetchBooks() {
                 if(this.search === '') {
                     console.log('emptyStringSearch')
-                    this.$store.commit('emptySearch', true);
-                    this.$emit("done-editing")
+                    this.$emit('empty-search', true)
                     return
                 }
 
-                this.$store.commit('emptySearch', false);
-                fetch('/books/search/' + this.search)
+                var headers = new Headers();
+                headers.append('Authorization', this.$store.getters.getToken);
+
+                var requestConfig = {
+                    method: 'GET',
+                    headers: headers
+                };
+
+                fetch('/api/books/search/' + this.search, requestConfig)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
                         this.$store.commit('change', data['searchResult'])
-                        console.log(this.$store)
+                        console.log('list books:' + this.$store.getters.getBookList)
                     })
             }
         }

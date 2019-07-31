@@ -29,7 +29,9 @@ final class CreateMediaObject
 
     /**
      * @param Request $request
+     *
      * @return MediaObject
+     *
      * @throws \ApiPlatform\Core\Exception\ResourceClassNotFoundException
      */
     public function __invoke(Request $request): MediaObject

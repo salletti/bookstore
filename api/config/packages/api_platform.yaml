@@ -7,8 +7,8 @@ parameters:
 
 api_platform:
     mapping:
-        paths: ['%kernel.project_dir%/src/Entity']
-    title: Hello API Platform
+        paths: ['%kernel.project_dir%/src/Entity', '%kernel.project_dir%/src/Dto']
+    title: Bookstore Api
     version: 1.0.0
     # Varnish integration, remove if unwanted
     http_cache:
@@ -22,3 +22,8 @@ api_platform:
     # Mercure integration, remove if unwanted
     mercure:
         hub_url: '%env(MERCURE_SUBSCRIBE_URL)%'
+    swagger:
+        api_keys:
+            apiKey:
+                name: Authorization
+                type: header

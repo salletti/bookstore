@@ -11,7 +11,7 @@
         "eslint-plugin-standard": "^4.0.0",
         "eslint-plugin-vue": "^5.2.2",
         "node-sass": "^4.12.0",
-        "sass-loader": "^7.1.0",
+        "sass-loader": "^7.0.1",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -23,10 +23,13 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "dotenv": "^8.0.0",
         "moment": "^2.24.0",
         "vue": "^2.6.10",
         "vue-loader": "^15.0.11",
+        "vue-router": "^3.0.6",
         "vue-template-compiler": "^2.6.10",
+        "vuex": "^3.1.1",
         "yarn": "^1.15.2"
     }
 }

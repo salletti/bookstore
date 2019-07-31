@@ -1,0 +1,6 @@
+App\Entity\UserApi:
+    user_api_1:
+        email: api-user@bookstore.com
+        password: <('$2y$12$wiN7w.K4bj9HWa/qwtLUb.EPvzgMyXgJpd9Ar4yw1rJDz7G9Lvvny')> # admin
+        roles: ['ROLE_API']
+        apiToken: eb0bcb7b7b9c1f4636538663f74ee7a6
