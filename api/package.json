@@ -27,6 +27,6 @@
         "vue": "^2.6.10",
         "vue-loader": "^15.0.11",
         "vue-template-compiler": "^2.6.10",
-        "yarn": "^1.15.2"
+        "yarn": "^1.22.0"
     }
 }
